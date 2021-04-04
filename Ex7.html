@@ -1,0 +1,31 @@
+<html> 
+<head>
+<title>Задание 7</title> 
+<meta charset="utf-8">
+
+	<script type="text/javascript">
+	function Module(array){
+		GUM = array.slice(0,3);
+		MAT = array.slice(4,7);
+		document.write("ГУМАНИТАРНЫЕ" + "<br>");
+		for (let i = 0; i < GUM.length; i++) {
+			document.write(GUM[i] + "<br>");
+		}
+		document.write("<br>");
+		document.write("ТОЧНЫЕ" + "<br>");
+		for (let i = 0; i < MAT.length; i++) {
+			document.write(MAT[i] + "<br>");
+		}
+	}
+	</script>
+
+</head>
+<body>
+<script language="JavaScript">
+subjects = new Array("Литература", "Русский", "Английский", "Французский", "Математика", "Физика", "Геометрия");
+Module(subjects);
+
+
+</script> 
+</body>
+</html>
