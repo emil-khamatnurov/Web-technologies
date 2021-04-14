@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Задание 2</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<form name="user_data">
+		<h3>Введите данные пользователя</h3>
+		<p>Введите ваше имя (обязательно)</p>
+		<input type="text" name="name_of_user"><br>
+		<p>Введите пароль (обязательно)</p>
+		<input type="text" name="user_password"><br>
+		<p>Подтвердите пароль (обязательно)</p>
+		<input type="text" name="user_password_confirmation"><br>
+		<p>Введите ваш Email (обязательно)</p>
+		<input type="text" name=""><br>
+		<p>Тема сообщения:</p>
+		<input type="text" name=""><br>
+		<p>Сообщение</p>
+		<input type="text" name=""><br>
+
+		<input type="button" value = "Отправить" id = "otpravka">
+		<input type="button" value = "Очистить" onclick="">
+		<input type="reset" value = "Отменить"> <!-- Проба пера -->
+	</form>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#otpravka").click(function(){
+				// В проверке полей пока нет функции, которая бы понимала, которое из незаполненных полей первое и на которое из них нужно перевести фокус
+				// Имя пользователя
+				if(document.user_data.name_of_user.value == ""){
+					alert("Вы должны ввести имя пользователя");
+					document.user_data.name_of_user.focus();}
+				
+				// Пароль
+				if(document.user_data.user_password.value == "") {
+					alert("Вы должны ввести пароль");
+					document.user_data.user_password.focus();}
+
+				if(document.user_data.user_password_confirmation.value == "" || document.user_data.user_password_confirmation.value != document.user_data.user_password.value) {
+					alert("Поле подтверждния пароля заполнено неправильно");
+					document.user_data.user_password.focus();}
+			});
+		});
+	</script>
+</body>
+</html>
