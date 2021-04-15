@@ -1,0 +1,42 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Задание 3</title>
+  </head>
+  <body>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+          $(document).ready(function(){
+
+              $(".run_right").click(function(){
+
+                  $("#img").animate({right: "-=100px"}, 500);
+              });
+
+              $(".run_left").click(function(){
+
+                  $("#img").animate({right: "+=100px"}, 500);
+              });
+
+              $(".run_top").click(function(){
+
+                  $("#img").animate({top: "-=100px"}, 500);
+              });
+
+              $(".run_down").click(function(){
+
+                  $("#img").animate({top: "+=100px"}, 500);
+              });
+
+          });
+    </script>
+      <button class="run_left">Влево</button>
+      <button class="run_right">Вправо</button> <br>
+      <button class="run_top">Вверх</button>
+      <button class="run_down">Вниз</button>
+      <br>
+      <br>
+          <img src="img.jpg" style="position: relative;" alt="Венера" width="300" height="300" id="img">
+  </body>
+</html>
