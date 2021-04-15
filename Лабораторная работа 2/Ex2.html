@@ -5,21 +5,22 @@
 	<meta charset="utf-8">
 </head>
 <body>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<form name="user_data">
 		<h3>Введите данные пользователя</h3>
 		<p>Введите ваше имя (обязательно)</p>
-		<input type="text" name="name_of_user"><br>
+		<input type="text" name="name_of_user" class = "input1"><br>
 		<p>Введите пароль (обязательно)</p>
-		<input type="text" name="user_password"><br>
+		<input type="text" name="user_password" class = "input2"><br>
 		<p>Подтвердите пароль (обязательно)</p>
-		<input type="text" name="user_password_confirmation"><br>
+		<input type="text" name="user_password_confirmation" class = "input3"><br>
 		<p>Введите ваш Email (обязательно)</p>
-		<input type="text" name=""><br>
+		<input type="text" name="user_email" class = "input4"><br>
 		<p>Тема сообщения:</p>
-		<input type="text" name=""><br>
-		<p>Сообщение</p>
-		<input type="text" name=""><br>
+		<input type="text" name="message_theme" class = "input5"><br>
+		<p>Сообщение (обязательно)</p>
+		<input type="text" name="message" class = "input6"><br>
 
 		<input type="button" value = "Отправить" id = "otpravka">
 		<input type="button" value = "Очистить" onclick="">
@@ -31,18 +32,47 @@
 			$("#otpravka").click(function(){
 				// В проверке полей пока нет функции, которая бы понимала, которое из незаполненных полей первое и на которое из них нужно перевести фокус
 				// Имя пользователя
+				let trigger = 0;
 				if(document.user_data.name_of_user.value == ""){
 					alert("Вы должны ввести имя пользователя");
-					document.user_data.name_of_user.focus();}
+					document.user_data.name_of_user.focus();
+				
+					 $(this).addClass('empty_field');
+					trigger = 1;} else {
+					$('.input1').removeClass('empty_field');	
+					}
 				
 				// Пароль
 				if(document.user_data.user_password.value == "") {
 					alert("Вы должны ввести пароль");
-					document.user_data.user_password.focus();}
+					document.user_data.user_password.focus();
+					trigger = 1;
+				} else if (document.user_data.user_password.value.length < 4){
+						alert("Длина пароля не соответствует требованиям");
+						trigger = 1;}
 
 				if(document.user_data.user_password_confirmation.value == "" || document.user_data.user_password_confirmation.value != document.user_data.user_password.value) {
 					alert("Поле подтверждния пароля заполнено неправильно");
-					document.user_data.user_password.focus();}
+					document.user_data.user_password.focus();
+					trigger = 1;}
+
+				// Email
+				if(document.user_data.user_email.value == ""){
+					alert("Вы должны ввести электронную почту");
+					document.user_data.user_email.focus();
+					trigger = 1;
+				} else if(document.user_data.user_email.value.includes("@") == false){
+					alert("Некорректный Email-адрес");
+					trigger = 1;}
+
+				// Сообщение
+				if(document.user_data.message.value == ""){
+					alert("Вы должны ввести сообщение");
+					document.user_data.message.focus();
+					trigger = 1;
+				} else if (document.user_data.message.value.length < 10){
+						alert("Длина сообщения не соответствует требованиям");
+						trigger = 1;}
 			});
 		});
 	</script>
