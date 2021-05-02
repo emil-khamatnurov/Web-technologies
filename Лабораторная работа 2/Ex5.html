@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Задание 5. Хаматнуров</title>
+  <meta charset="utf-8">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"></script>    
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+    $(".drag").draggable(); //
+    });
+  </script>
+  <script type="text/javascript">
+    $(function(){
+
+
+    $(".drag").mousemove(function(event){
+      $(".Coordinates").html('Координаты мыши на картинке при движении: По оси X:'+event.pageX+', По оси Y:'+event.pageY);
+        });
+     });
+  </script>
+</head>
+<body>
+  <img src="img.jpg" class="drag"> <!-- Элемент с классов drag -->
+  <p class = "Coordinates"></p>
+</body>
+</html>
