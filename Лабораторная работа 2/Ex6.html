@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Задание 6. Хаматнуров</title>
+	<meta charset="utf-8">
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	 <script type="text/javascript">
+	 	$(document).ready(function(){
+	 		let ans1 = 0, ans2 = 0, ans3 = 0, ans4 = 0, all = 0;
+	 		$("#opt1").click(function(){
+	 			ans1++;
+	 			all++;
+	 		});
+	 		$("#opt2").click(function(){
+	 			ans2++;
+	 			all++;
+	 		});
+	 		$("#opt3").click(function(){
+	 			ans3++;
+	 			all++;
+	 		});
+	 		$("#opt4").click(function(){
+	 			ans4++;
+	 			all++;
+	 		});
+
+	 		$("Button").click(function(){
+	 			$("#Count").css({ 'display': 'block' }).text('Мужской пол:');
+	 		});
+	 	});
+	 </script>
+</head>
+<body>
+	<p id="Count">1</p>
+	<p id="Procent"></p>
+	<form>
+		<h1>Опросник!</h1>
+		<input type="radio" id="opt1">A</input><br>
+		<input type="radio" id="opt2">B</input><br>
+		<input type="radio" id="opt3">C</input><br>
+		<input type="radio" id="opt4">D</input><br>
+		<input type="button" value="Подсчитать значения" id="Button">
+	</form>
+</body>
+</html>
