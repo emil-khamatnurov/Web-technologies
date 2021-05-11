@@ -1,10 +1,268 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Задание 5. Хаматнуров</title>
-	<meta charset="utf-8">
-</head>
-<body>
+<html lang="en" dir="ltr">
+  <head>
+    <meta content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Задание 5. Хаматнуров</title>
+    <link rel="stylesheet" href="cals.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          var count=0;
+          var r=0;
+        // Delete 1 simbol
+            $("#del").click(function(){
+                var field=$(".field").val();
+                field=field.slice(0, -1);
+                $(".field").val(field);
 
-</body>
+                var arr1=field.split(/[^+]/);
+                var arr2=field.split(/[^-]/);
+                var arr3=field.split(/[^*]/);
+                var arr4=field.split(/[^/]/);
+
+                if($.inArray("+",arr1)==-1 && $.inArray("*",arr2)==-1 && $.inArray("/",arr3)==-1 && $.inArray("-",arr4)==-1)
+                {
+                  count--
+                }
+
+            });
+
+        // Delete all simbol
+            $("#del_all").click(function(){
+                field=''
+                $(".field").val(field);
+                count--;
+            });
+
+        // Num 1
+            $("#num1").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+1);
+            });
+
+        // Num 2
+            $("#num2").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+2);
+            });
+
+        // Num 3
+            $("#num3").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+3);
+            });
+
+        // Num 4
+            $("#num4").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+4);
+            });
+
+        // Num 5
+            $("#num5").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+5);
+            });
+
+        // Num 6
+            $("#num6").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+6);
+            });
+
+        // Num 7
+            $("#num7").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+7);
+            });
+
+        // Num 8
+            $("#num8").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+8);
+            });
+
+        // Num 9
+            $("#num9").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+9);
+            });
+
+        // Num 0
+            $("#num0").click(function(){
+                var field=$(".field").val();
+                $(".field").val(field+0);
+            });
+
+        // Plus
+            $("#plus").click(function(){
+                var field=$(".field").val();
+
+                if (count<1) {
+
+                    $(".field").val(field+"+");
+                    count++;
+                }
+
+            });
+
+        // Minus
+            $("#minus").click(function(){
+                var field=$(".field").val();
+
+                if (count<1) {
+
+                    $(".field").val(field+"-");
+                    count++;
+                }
+
+            });
+
+        // Multiply
+            $("#multiply").click(function(){
+                var field=$(".field").val();
+
+                if (count<1) {
+
+                    $(".field").val(field+"*");
+                    count++;
+                }
+            });
+
+        // Share
+            $("#share").click(function(){
+                var field=$(".field").val();
+
+                if (count<1) {
+
+                    $(".field").val(field+"/");
+                    count++;
+                }
+
+            });
+
+        // Point
+            $("#point").click(function(){
+                var field=$(".field").val();
+
+                var arr1=field.split("+");
+                var arr2=field.split("-");
+                var arr3=field.split("*");
+                var arr4=field.split("/");
+                console.log(arr1);
+
+                var arr=field.split(/[^.]*/);
+                if(arr1.length<=2){
+
+                    $(".field").val(field+".");
+                    r++;
+                }
+
+                if (arr1.length>=1 && r<1) {
+                    var arr_2=arr1[1].split(".");
+
+                    console.log(arr_2);
+
+                    if(arr_2.length<=2){
+
+                        $(".field").val(field+".");
+                    }
+                }
+
+
+            });
+
+        // Equally
+            $("#equally").click(function(){
+                var field=$(".field").val();
+
+                var arr1=field.split(/[^+]*/);
+                var arr2=field.split(/[^-]*/);
+                var arr3=field.split(/[^*]*/);
+                var arr4=field.split(/[^/]*/);
+
+                r--
+            // Summa
+                if($.inArray("+",arr1)>=0 && count==1)
+                {
+                    var number= field.split('+');
+                    var summa=parseFloat(number[0])+parseFloat(number[1]);
+                    $(".field").val(summa);
+                    count--;
+                }
+
+            // Composition
+                if($.inArray("*",arr3)>=0 && count==1)
+                {
+                    var number= field.split('*');
+                    var composition=parseFloat(number[0])*parseFloat(number[1]);
+                    $(".field").val(composition);
+                    count--;
+                }
+
+            // Quotient
+                if($.inArray("/",arr4)>=0 && count==1)
+                {
+                    var number= field.split('/');
+                    var quotient=parseFloat(number[0])/parseFloat(number[1]);
+                    $(".field").val(quotient);
+                    count--;
+                }
+
+            // Difference
+                if($.inArray("-",arr2)>=0 && count==1)
+                {
+                    var number= field.split('-');
+
+                    if (arr2[0]=="-" && arr2[1]=="-") {
+
+                        $(".field").val(parseFloat(number[1])*(-1)-parseFloat(number[2]));
+                    }else{
+
+                        $(".field").val(parseFloat(number[0])-parseFloat(number[1]));
+                    }
+
+                    count--;
+                }
+            });
+
+        });
+    </script>
+  </head>
+  <body>
+      <div class="form_calc">
+          <input type="text" class="field" disabled>
+          <div class="knopki">
+              <div class="row">
+                  <a class="buttons" href='#' id="del"> << </a>
+                  <a class="buttons" href='#' id="del_all"> C </a>
+              </div>
+              <div class="row">
+                  <a class="buttons" href='#' id="num1"> 1 </a>
+                  <a class="buttons" href='#' id="num2"> 2 </a>
+                  <a class="buttons" href='#' id="num3"> 3 </a>
+                  <a class="buttons" href='#' id="plus"> + </a>
+              </div>
+              <div class="row">
+                  <a class="buttons" href='#' id="num4"> 4 </a>
+                  <a class="buttons" href='#' id="num5"> 5 </a>
+                  <a class="buttons" href='#' id="num6"> 6 </a>
+                  <a class="buttons" href='#' id="minus"> - </a>
+              </div>
+              <div class="row">
+                  <a class="buttons" href='#' id="num7"> 7 </a>
+                  <a class="buttons" href='#' id="num8"> 8 </a>
+                  <a class="buttons" href='#' id="num9"> 9 </a>
+                  <a class="buttons" href='#' id="multiply"> * </a>
+              </div>
+              <div class="row">
+                  <a class="buttons" href='#' id="num0"> 0 </a>
+                  <a class="buttons" href='#' id="share"> / </a>
+                  <a class="buttons" href='#' id="point"> , </a>
+                  <a class="buttons" href='#' id="equally"> = </a>
+              </div>
+          </div>
+      </div>
+  </body>
 </html>
