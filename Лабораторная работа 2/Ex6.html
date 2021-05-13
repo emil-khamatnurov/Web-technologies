@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Задание 6. Хаматнуров</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+          $(document).ready(function(){
+              var male=0, female=0, average=0;
+              var all=0;
+              $("#male").click(function(){
+
+                  male++;
+                  all++;
+              });
+              $("#female").click(function(){
+
+                  female++;
+                  all++;
+              });
+              $("#average").click(function(){
+
+                  average++;
+                  all++;
+              });
+              $("#button").click(function(){
+
+                  male=male/all*100+"%";
+                  female=female/all*100+"%";
+                  average=average/all*100+"%";
+                  $('#male_text').css({ 'display': 'block' }).text('Мужской пол:'+male);
+                  $('#female_text').css({ 'display': 'block' }).text('Женский пол:'+female);
+                  $('#average_text').css({ 'display': 'block' }).text('Средний пол:'+average);
+              });
+
+          });
+    </script>
+  </head>
+  <body>
+    <form>
+    <p>Какой ваш пол?</p>
+    <div>
+
+      <input type="radio" id="male" name="contact" value="male">
+      <label for="male">Мужской</label>
+
+      <input type="radio" id="female" name="contact" value="female">
+      <label for="female">Женский</label>
+
+      <input type="radio" id="average" name="contact" value="average">
+      <label for="average">Средний</label>
+    </div>
+  <br>
+    <div>
+      <input type="button" id="button" value="Просмотр голосов">
+    </div>
+    </form>
+    <p id="male_text"></p>
+    <p id="female_text"></p>
+    <p id="average_text"></p>
+  </body>
+</html>
