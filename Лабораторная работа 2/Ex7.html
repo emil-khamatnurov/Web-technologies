@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Страница</title>
+	<link rel="stylesheet" href="/../css/template.css" type="text/css" />
+	<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
+	<script type="text/javascript" src="/../js/calculator.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() { // Ждём загрузки страницы	   
+	$("input[name=send]").click( function () { // Событие нажатия на кнопку "Расчёт"
+		var action = $("select[name=action]").val(); // Получаем значение действия, которое нужно выполнить
+		var first = $("input[name=first]").val() * 1; // Переменная первого числа
+		var second = $("input[name=second]").val() * 1; // Переменная второго числа
+		var result; // Переменная результата
+		if (action == '+') { // Если действие - сложение
+			result = first + second; //  складываем
+		}
+		else if (action == '-'){ // Если действие вычитание
+			result = first - second; // вычитаем
+		}
+		else if (action == '*'){ // Если действие умножение
+			result = first * second; // умножаем
+		}
+		else if (action == '/'){ // Если действие деления
+			result = first / second; // делим
+		}
+		$("input[name=result]").val(result); // записываем результат
+	});
+});
+	</script>
+</head>
+<body>
+	<form>
+		<div><label>Первое число:</label><input type="text" name="first" placeholder="Введите число"/></div>
+		<div><label>Второе число:</label><input type="text" name="second" placeholder="Введите число"/></div>
+		<div><label>Выберите действие:</label>
+			<select name="action">
+				<option>+</option>
+				<option>-</option>
+				<option>*</option>
+				<option>/</option>
+			</select>
+		</div>
+		<div><input type="button" name="send" value="Рассчитать"/></div>
+		<div><label>Результат:</label><input type="text" name="result" placeholder="Ответ"/></div>
+	</form>
+</body>
+</html>
