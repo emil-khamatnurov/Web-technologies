@@ -1,48 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Страница</title>
-	<link rel="stylesheet" href="/../css/template.css" type="text/css" />
-	<SCRIPT type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></SCRIPT>
-	<script type="text/javascript" src="/../js/calculator.js"></script>
+	<title>Задание 7. Хаматнуров</title>
+	<meta charset="utf-8">
+	<style>
+		.calculator__key {
+	width: 41px;
+    height: 35px;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+    text-transform: uppercase;
+	}
+
+	.calculator__display {
+    margin: 0 0 20px;
+    border: 1px solid darkslateblue;
+    padding: 4px 2px;
+    text-align: right;
+    font: 700 16px/1 Arial, sans-serif;
+    background-color: beige;
+	}
+	</style>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() { // Ждём загрузки страницы	   
-	$("input[name=send]").click( function () { // Событие нажатия на кнопку "Расчёт"
-		var action = $("select[name=action]").val(); // Получаем значение действия, которое нужно выполнить
-		var first = $("input[name=first]").val() * 1; // Переменная первого числа
-		var second = $("input[name=second]").val() * 1; // Переменная второго числа
-		var result; // Переменная результата
-		if (action == '+') { // Если действие - сложение
-			result = first + second; //  складываем
-		}
-		else if (action == '-'){ // Если действие вычитание
-			result = first - second; // вычитаем
-		}
-		else if (action == '*'){ // Если действие умножение
-			result = first * second; // умножаем
-		}
-		else if (action == '/'){ // Если действие деления
-			result = first / second; // делим
-		}
-		$("input[name=result]").val(result); // записываем результат
-	});
+	$(document).ready(function () {
+	// Создание ссылок на объекты калькулятора
+    let calc = $('.calculator');
+    let calcDisplay = calc.find('.calculator__display');
+    let calcKeys = calc.find('.calculator__key');
+    let calcButton = calc.find('.calculator__button');
+    let calcClear = calc.find('.calculator__clear');
+    let calcEqual = calc.find('.calculator__key--equal');
+    let calcPower = calc.find('.calculator__power');
+    let calcSpace = calc.find('.calculator__backspace');
+
+
+    calcKeys.each(function () {
+        var current = $(this).attr('value');
+        $(this).text(current);
+    });
+
+    // Числа
+    calcButton.on('click', function () {
+        calcDisplay.val( calcDisplay.val() + $(this).attr('value') );
+    });
+
+    // Очистка
+    calcClear.on('click', function () {
+        calcDisplay.val('');
+    });
+
+    // Показ результата
+    calcEqual.on('click', function () {
+        calcDisplay.val( eval( calcDisplay.val() ) );
+    });
+
+    // POWER BUTTON
+    calcPower.on('click', function () {
+        calcDisplay.val( Math.pow( calcDisplay.val(), 3 ) );
+    });
+
+    // BACKSPACE BUTTON
+    calcSpace.on('click', function () { // http://www.w3schools.com/jsref/jsref_substring.asp
+        calcDisplay.val( calcDisplay.val().substring(0, calcDisplay.val().length-1) );
+    });
+
 });
 	</script>
 </head>
 <body>
-	<form>
-		<div><label>Первое число:</label><input type="text" name="first" placeholder="Введите число"/></div>
-		<div><label>Второе число:</label><input type="text" name="second" placeholder="Введите число"/></div>
-		<div><label>Выберите действие:</label>
-			<select name="action">
-				<option>+</option>
-				<option>-</option>
-				<option>*</option>
-				<option>/</option>
-			</select>
-		</div>
-		<div><input type="button" name="send" value="Рассчитать"/></div>
-		<div><label>Результат:</label><input type="text" name="result" placeholder="Ответ"/></div>
-	</form>
+<h2>Калькулятор!</h2>
+
+<div class="calculator">
+
+    <form class="calculator__form">
+  
+        <div class="calculator__row">
+            <input class="calculator__display" id="display" type="text" disabled />
+        </div>
+     
+        <div class="calculator__row">
+            <button type="button" value="c" class="calculator__key calculator__clear"></button>
+            <button type="button" value="<--" class="calculator__key calculator__backspace"></button>
+            <button type="button" value="^3" class="calculator__key calculator__power"></button>
+            <button type="button" value="+" class="calculator__key calculator__button"></button>
+        </div>
+
+        <div class="calculator__row">
+            <button type="button" value="9" class="calculator__key calculator__button"></button>
+            <button type="button" value="8" class="calculator__key calculator__button"></button>
+            <button type="button" value="7" class="calculator__key calculator__button"></button>
+            <button type="button" value="-" class="calculator__key calculator__button"></button>
+        </div>
+   
+        <div class="calculator__row">
+            <button type="button" value="6" class="calculator__key calculator__button"></button>
+            <button type="button" value="5" class="calculator__key calculator__button"></button>
+            <button type="button" value="4" class="calculator__key calculator__button"></button>
+            <button type="button" value="*" class="calculator__key calculator__button"></button>
+        </div>
+ 
+        <div class="calculator__row">
+            <button type="button" value="3" class="calculator__key calculator__button"></button>
+            <button type="button" value="2" class="calculator__key calculator__button"></button>
+            <button type="button" value="1" class="calculator__key calculator__button"></button>
+            <button type="button" value="/" class="calculator__key calculator__button"></button>
+        </div>
+   
+        <div class="calculator__row">
+            <button type="button" value="0" class="calculator__key calculator__button"></button>
+            <button type="button" value="." class="calculator__key calculator__button"></button>
+            <button type="button" value="=" class="calculator__key calculator__key--equal"></button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
