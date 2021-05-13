@@ -6,10 +6,9 @@
     <title>Задание 6. Хаматнуров</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-             let male=0, female=0, average=0;
-              let all=0;
-          $(document).ready(function(){
-            
+            let male=0, female=0, average=0;
+            let all=0;
+          $(function(){
               $("#male").click(function(){
 
                   male++;
@@ -27,12 +26,9 @@
               });
               $("#button").click(function(){
 
-                  male=male/all*100+"%";
-                  female=female/all*100+"%";
-                  average=average/all*100+"%";
-                  $('#male_text').css({ 'display': 'block' }).text('Мужской пол:'+male);
-                  $('#female_text').css({ 'display': 'block' }).text('Женский пол:'+female);
-                  $('#average_text').css({ 'display': 'block' }).text('Средний пол:'+average);
+                  $('#male_text').css({ 'display': 'block' }).text('Мужской пол:'+ male/all*100+"%");
+                  $('#female_text').css({ 'display': 'block' }).text('Женский пол:'+ female/all*100+"%");
+                  $('#average_text').css({ 'display': 'block' }).text('Средний пол:'+average/all*100+"%");
               });
 
           });
