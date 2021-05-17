@@ -1,4 +1,3 @@
-Файл main.js
 let current = 0;
 let id = 0;
 

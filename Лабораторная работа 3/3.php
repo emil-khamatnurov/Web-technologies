@@ -1,7 +1,6 @@
 
 <?php 
 
-
 $articles = array(
   "Article-1" => array(
     "img" => "1.jpg",
