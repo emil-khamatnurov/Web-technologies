@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <title>Фото ателье</title>
+        <meta charset = "UTF-8">
+
+        <style>
+            section{
+                background-color: rgb(255, 252, 102);
+            }
+            h3{
+                font-size: 40px;
+                background-color: rgb(153, 241, 117);
+            }
+            .ui-slider {
+                height: 15px;
+                width: 200px;
+            }
+            .wrapper {
+                display:inline-block;
+                /* float: center; */
+                margin: 0 auto;
+            }
+        </style>
+
+        <link rel="stylesheet" href="../jquery-ui-1.12.1.custom/jquery-ui.css">
+        <script src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $(document).tooltip();
+                $("#date").datepicker({
+                    dateFormat: "dd.mm.yy",
+                    altFormat: "dd.mm.yy",
+                    altField: "#altFormatDate",
+                    changeMonth: true,
+                    changeYear: true,
+                    monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                    monthNamesShort:["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                    dayNames: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+                    dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                });
+
+                $("#type").selectmenu();
+
+                $("#slider").slider({
+                step: 1,
+                    min: 1,
+                    max: 30,
+                    slide: function(event, ui) {
+                        document.fillform.slider_view.value = ui.value;
+
+                        people = ui.value
+
+                        price();
+                    },
+                });
+
+                $("#accordion").accordion({
+                    activate: function(event, ui) {
+                        var currentHeaderID = ui.newHeader.attr("id");
+                        if (currentHeaderID === "accordion_1"){
+                            place = 1;
+                        }
+                        else{
+                            place = 0;
+                        }
+
+                        price();
+                    }
+                });
+
+                $("#ok_dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    buttons: {
+                        "Хорошо": function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    position: { my: "center", at: "center", of:"#fillform"}
+                });
+                $("#error_dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    position: { my: "center", at: "center", of:"#fillform"}
+                });
+            });
+
+            let people = 1;
+            let place = 1;
+
+            function scrollDown(){
+                $('html, body').animate({
+                    scrollTop: $('#fillform').offset().top
+                }, 200);
+            }
+
+            function price(){
+                let price = document.getElementById("price");
+                let people = document.getElementById("slider_view").value;
+
+                price.value = 150 * people + place * 1000 + 2500;
+            }
+
+            function send(){
+                var name = document.getElementById("name").value;
+                var date = document.getElementById("date").value;
+
+                if (length(date)==0 || length(name)==0){
+                    $("#error_dialog").dialog("open");
+                    return;
+                }
+                $("#ok_dialog").dialog("open");
+            }
+
+            function length(str){
+                let strIter = str[Symbol.iterator]();
+                let str_lenght = 0;
+                for (let ch of strIter){str_lenght++;}
+                return str_lenght;
+            }
+        </script>
+        
+    </head>
+    <body style="background-color: darkorchid;">
+        <section onclick="scrollDown();">
+            <h3>Фотоателье 19-ый век</h3>
+            <table>
+                <tr>
+                    <td>
+                        <img src=1.jpg title="Фотоателье 19-ый век">
+                    </td>
+                    <td style="font-size: 20px;">
+                        Фотографируем с стиле 19-ого века на камеру того же века.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section onclick="scrollDown();">
+            <h3>Фотограф Алексей</h3>
+            <table>
+                <tr>
+                    <td>
+                        <img src=2.jpg title="Фотограф Алексей">
+                    </td>
+                    <td style="font-size: 20px;">
+                        Фотографирую, кого угодно, где угодно, как угодно.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section onclick="scrollDown();">
+            <h3>Кошкино ателье</h3>
+            <table>
+                <tr>
+                    <td>
+                        <img src=3.jpg title="Кошкино ателье">
+                    </td>
+                    <td style="font-size: 20px;">
+                        Мяу, мяу-мяу-мяу, мур-мяу.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section onclick="scrollDown();">
+            <h3>Ателье у Сейлема</h3>
+            <table>
+                <tr>
+                    <td>
+                        <img src=4.jpg title="Ателье у Сейлема">
+                    </td>
+                    <td style="font-size: 20px;">
+                        Дай мне камеру, и я сделаю тебя моделью, а потом мы захватим мир.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <div id="ok_dialog" title="">
+            <p>Вы записаны.</p>
+        </div>
+        <div id="error_dialog" title="Ошибка!">
+            <p>Не все поля заполнены.</p>
+        </div>
+
+        <section style="background-color: chocolate;" align="center">
+            <h1 style="background-color: cornflowerblue;font-size: 40px;">Записаться на фотосессию</h1>
+            <form name='fillform' id='fillform'>
+                <p><div style="font-size: 20px;">Имя</div><input id="name" title="Имя" type="text"></p>
+                <p><div style="font-size: 20px;">Номер телефона</div><input id="number" title="Телефон" type="text"></p>
+                <section style="text-align:center;">
+                    <div style="font-size: 20px;">День брони</div>
+                    <div class="wrapper" id="date" title="День брони" readonly="readonly">
+                    <input id="altFormatDate" type="text" readonly="readonly">
+                </section>
+
+                <p>
+                    <div id="accordion">
+                        <h3 id="accordion_1">Съёмка в студии</h3>
+                        <div>
+                            <p>Съёмка проиходит в студии. Вы платите небольшую стоимость за ареду нашей студии.</p>
+                        </div>
+                        <h3 id="accordion_2">Съёмка на улице </h3>
+                        <div>
+                            <p>Съёмка проиходит на улице. Место выбираете вы.</p>
+                        </div>
+                      </div>
+                </p>
+
+                <p>
+                    <div style="font-size: 20px;">Тип фотосессии</div>
+                    <select id="type">
+                        <option value="0">Обычное фото</option>
+                        <option value="1" selected="selected">Фото с фоном</option>
+                        <option value="2">Фотосессия с антуражем</option>
+                    </select>
+                </p>
+
+                <p>
+                    <div style="font-size: 20px;">Количество людей на фотосессии</div>
+                    <p><p class="wrapper" type="text" id="slider" readonly="readonly"></p>
+                    
+                </p>
+                <input id="slider_view" name="slider_view" type="text" title="Количество людей" value="1" readonly="readonly">
+
+                <p>
+                    <div style="font-size: 20px;">Цена</div>
+                    <input id="price" type="text" value="3650" title="Цена" readonly="readonly">
+                </p>
+                
+                <p><input class="ui-button ui-widget ui-corner-all" type="button" value="Записаться" onclick="send();"></p>
+            </form>
+
+            <section style="height:45px;background-color: cyan;">
+
+            </section>
+        </section>
+        
+    </body>
+</html>

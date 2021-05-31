@@ -1,0 +1,213 @@
+ <html>
+    <title>PACMAN 2021</title>
+    <head>
+        <meta charset = "UTF-8">
+
+        <link rel="stylesheet" href="../../jquery-ui-1.12.1.custom/jquery-ui.min.css">
+        <script src="../../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="../../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+        <style type="text/css">
+            th, td {
+                border-radius: 0px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .img-wrap {
+                position: relative;
+            }
+
+            .img-wrap img {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+        </style>
+    </head>
+    <body  align="center">
+       <h1 style="font-size: 60px;">PACMAN 2021</h1>
+        <game_field id="game_field"></game_field>
+
+        <div id="end_dialog" title="PACMAN 2021">
+            <p>Игра закончена</p>
+        </div>
+
+        <script language="JavaScript">
+            class Point{
+                constructor(x, y){
+                    this.x = x;
+                    this.y = y;
+                }
+
+                field_id(){
+                    return this.x + this.y * field[0].length;
+                }
+            }
+
+            var field = [
+                [1,1,1,1,0,0,0,0,0,0,0,1,1,1,0],
+                [0,0,0,1,1,1,1,1,0,0,0,1,0,1,0],
+                [0,0,0,1,0,0,0,1,0,0,0,1,0,1,0],
+                [1,1,1,1,0,0,0,1,1,1,0,1,1,1,0],
+                [1,0,0,1,1,1,1,1,0,1,0,1,0,1,1],
+                [1,0,0,1,0,0,0,1,0,1,0,1,0,0,1],
+                [1,1,1,1,0,0,0,1,0,1,1,1,0,0,1],
+                [1,0,0,1,0,0,0,1,0,0,0,1,0,1,1],
+                [1,1,1,1,1,1,1,1,1,1,0,1,1,1,0],
+                [0,0,0,1,0,0,1,0,0,1,1,1,0,0,0],
+                [0,0,0,1,0,0,1,0,0,0,0,1,1,1,1],
+                [0,1,1,1,0,0,1,0,0,0,0,1,0,0,1],
+                [0,1,0,1,1,1,1,0,0,0,0,1,0,0,1],
+                [0,1,0,1,0,0,1,1,1,1,1,1,0,0,1],
+                [0,1,1,1,0,0,0,0,0,0,0,1,1,1,1],
+            ];
+
+            let player = new Point(0, 0);
+
+            let monsters = Math.ceil(Math.random()*10)+1;
+
+            set_monters();
+            create_game_field();
+
+            $("#end_dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    "Начать сначала": function() {
+                        $(this).dialog("close");
+                        document.location.reload();
+                    }
+                }
+            });
+
+            function end_game(text){
+                document.onkeydown = null;
+                $("#end_dialog").dialog("open");
+            }
+
+            function set_monters(){
+                for (let i=0; i<monsters; ){
+                    let x = Math.floor(Math.random()*field[0].length);
+                    let y = Math.floor(Math.random()*field.length);
+
+                    if (y!=0 && x!=0 && field[y][x]==1){
+                        field[y][x]=2;
+                        i++;
+                    }
+                }
+            }
+
+            function create_game_field(){
+                var game_field = document.getElementById("game_field");
+
+                var tbdy = document.createElement('tbody');
+
+                for (var i=0;i<field.length;i++){
+                    var tr = document.createElement('tr');
+
+                    for (var d=0;d<field[0].length;d++){
+                        var td = document.createElement('td');
+
+                        var player = document.createElement('p');
+                        if (field[i][d]==0){
+                            td.innerHTML = "<img width='55px' height='55px' src = 'стена.jpg'>";
+                            td.innerHTML += "<img id='game_field_cell_" + (i*field[0].length + d) + "_p' width='55px' height='55px'>";
+                        }
+                        else if (field[i][d]==1){
+                            td.innerHTML = "<img width='55px' height='55px' src = 'плитка.jpg'>";
+                            td.innerHTML += "<img id='game_field_cell_" + (i*field[0].length + d) + "_p' width='55px' height='55px'>";
+                        }
+                        else if (field[i][d]==2){
+                            td.innerHTML = "<img width='55px' height='55px' src = 'плитка.jpg'>";
+                            td.innerHTML += "<img id='game_field_cell_" + (i*field[0].length + d) + "_p' width='55px' height='55px' src = 'монстр.png'>";
+                        }
+
+                        td.classList.add("img-wrap");
+                        td.id = "game_field_cell_" + (i*field[0].length + d);
+                        td.align = "center";
+
+                        tr.appendChild(td);
+                    }
+
+                    tbdy.appendChild(tr);
+                }
+
+                game_field.appendChild(tbdy);
+                
+                let new_game_field_cell = document.getElementById("game_field_cell_0_p");
+                new_game_field_cell.src = "pacman.png";
+            }
+
+            document.onkeydown = function(e){
+                let last_game_field_cell = document.getElementById("game_field_cell_" + player.field_id() + "_p");
+
+                switch(e.which) {
+                    case 37: // left
+                        if (player.x == 0){
+                            return;
+                        };
+
+                        player.x -= 1;
+
+                        if (field[player.y][player.x]==0){
+                            player.x += 1;
+                        }
+                    break;
+
+                    case 38: // up
+                        if (player.y == 0){
+                            return;
+                        };
+                        player.y -= 1;
+
+                        if (field[player.y][player.x]==0){
+                            player.y += 1;
+                        }
+                    break;
+
+                    case 39: // right
+                        if (player.x == field[0].length-1){
+                            return;
+                        };
+                        player.x += 1;
+
+                        if (field[player.y][player.x]==0){
+                            player.x -= 1;
+                        }
+                    break;
+
+                    case 40: // down
+                        if (player.y == field.length-1){
+                            return;
+                        };
+                        player.y += 1;
+
+                        if (field[player.y][player.x]==0){
+                            player.y -= 1;
+                        }
+                    break;
+                    
+                    default: return; // exit this handler for other keys
+                }
+
+
+                last_game_field_cell.src = "плитка.jpg";
+                let new_field_id = player.field_id();
+
+                let new_game_field_cell = document.getElementById("game_field_cell_" + new_field_id + "_p");
+                new_game_field_cell.src = "pacman.png";
+
+                if (field[player.y][player.x]==2){
+                    field[player.y][player.x]=1;
+                    monsters -= 1;
+                    if (monsters == 0){
+                        end_game();
+                    }
+                }
+
+                e.preventDefault();
+            }
+        </script>
+    </body>
+</html>
