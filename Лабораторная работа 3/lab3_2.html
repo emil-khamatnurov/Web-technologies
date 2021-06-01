@@ -1,0 +1,93 @@
+<html>
+    <head><meta charset = "UTF-8"></head>
+    <body align = "center">
+        <h1>Фотоателье</h1>
+        <form name="review_form">
+            <div>Ваше имя</div>
+            <input name="name" type="text">
+            <div>Ваша e-mail</div>
+            <input name="email" type="text">
+            <div>Ваш отзыв</div>
+            <input name="review" type="text">
+            <div></div>
+            <input type="button" value="Отправить" onclick="send_review();">
+        </form>
+        <section id="all_reviews"></section>
+    </body>
+
+    <script language="JavaScript" src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+    <script language="JavaScript">
+        get_reviews();
+
+        let reviews = [];
+
+        function send_review() {
+            var name = document.review_form.name.value;
+            var email = document.review_form.email.value;
+            var review = document.review_form.review.value;
+            if (length(name)==0 || length(email)==0 || length(review)==0){
+                alert("Заполните все поля");
+                return;
+            }
+
+            reviews.push(`"${name}":{"email":"${email}","text":"${review}"}`);
+
+            $.ajax({
+                type: "GET",
+                dataType : 'json',
+                url: 'add_review.php',
+                data: { data: json_string()},
+            });
+
+            let section = document.getElementById("all_reviews");
+            section.innerHTML += 
+                `<p>
+                    <h1> ${name} </h1>
+                    <p>${email}</p>
+                    <p>${review}</p>
+                </p>`;
+
+            alert("Ваш обзор добавлен");
+        }
+
+        function get_reviews() {
+            $.getJSON("reviews.json", function(data){
+                let section = document.getElementById("all_reviews");
+                section.innerHTML = "";
+
+                $.each(data, function(key, val){
+                    reviews.push(`"${key}":{"email":"${val['email']}","text":"${val['text']}"}`);
+
+                    section.innerHTML += 
+                        `<p>
+                            <h1> ${key} </h1>
+                            <p>${val['email']}</p>
+                            <p>${val['text']}</p>
+                        </p>`;
+                });
+            });
+        }
+
+        function json_string(){
+            let string = "{";
+
+            reviews.forEach(function(v, i, a){
+                string += v;
+                string += ',';
+            });
+
+            string = string.slice(0,-1);
+
+            string += "}";
+
+            return string;
+        }
+
+        function length(str){
+            var strIter = str[Symbol.iterator]();
+            let str_lenght = 0;
+            for (let ch of strIter){str_lenght++;}
+            return str_lenght;
+        }
+    </script>
+</html>

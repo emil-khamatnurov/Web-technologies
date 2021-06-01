@@ -1,0 +1,11 @@
+{
+    "Обычное фотоателье": {"description": "Самое обычное фотоателье", "image":"http://reconomica.ru/wp-content/uploads/2017/08/%D1%84%D0%BE%D1%82%D0%BE%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%B5-1024x473.jpg"},
+    "Новое фотоателье": {"description": "Самое новое фотоателье", "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Posing_Cliff_Berryman.jpg/1200px-Posing_Cliff_Berryman.jpg"},
+    "Фотоателье у Сейлема": {"description": "Дай мне камеру, и я сделаю тебя моделью, а потом мы захватим мир", "image":"https://citaty.info/files/characters/198143.jpg"},
+    "Фотограф Алексей": {"description": "Фотографирую, кого угодно, где угодно, как угодно", "image":"https://i.mycdn.me/i?r=AzEOxUXG5QgodWC3x6hM10CkKtYgQaJQJEY7UOq-EZ7zIX1NSSJzxUGLKzXxLzCaH6o&fn=sqr_288"},
+    "Ещё одно фотоателье": {"description": "Вы про него точно не слышали", "image":"https://www.tlt.russ-na-volge.ru/upload/iblock/a66/a663546c137125fc435fc9efe4bb8741.jpg"},
+    "Карнавал": {"description": "Фотосессии в костюмах", "image":"https://varlamov.me/img/-/2G1J0224.jpg"},
+    "Фотоателье Владивостока": {"description": "Делаем классные коллажи", "image":"https://www.vl.ru/afisha/uploads/events/69c/61187_big.jpeg?v=1492769406"},
+    "Фотоателье": {"description": "Фотоателье", "image":"https://in-posad.ru/img/2011/11/800x600/QRWC.jpg"},
+    "Светильники": {"description": "Чем больше света, тем лущще", "image":"https://zapad24.ru/uploads/posts/2016-05/1462163023_photostudio-720x340.jpg"}
+}

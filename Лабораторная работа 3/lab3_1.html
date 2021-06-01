@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <meta charset = "UTF-8">
+    </head>
+    <body>
+        <section id="news_body"></section>
+        <input type="button" value="Подгрузить ещё новостей" onclick="upload();">
+    </body>
+
+    <script language="JavaScript" src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+    <script language="JavaScript">
+        let loaded = 0;
+        let need_to_load = 5;
+
+        $(document).ready(upload);
+
+        function upload() {
+            // Запрос
+            $.getJSON("news.json", function(data){
+                let section = document.getElementById("news_body");
+
+                let current_loaded = 0;
+                let skip = loaded;
+
+                $.each(data, function(key, val){
+                    if (skip > 0){
+                        skip--;
+                        return true;
+                    }
+                    if (current_loaded == need_to_load){
+                        return false;
+                    }
+
+                    section.innerHTML += 
+                        `<p>
+                            <h1> ${key} </h1>
+                            <p><img src='${val['image']}'></p>
+                            <p>${val['description']}</p>
+                        </p>`;
+
+                    current_loaded++;
+                    loaded++;
+                });
+
+                need_to_load = 2;
+            });
+        }
+    </script>
+</html>
